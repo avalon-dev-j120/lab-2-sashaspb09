@@ -1,9 +1,9 @@
 package ru.avalon.java.j20.labs.tasks;
 
+import java.io.ByteArrayOutputStream;
 import ru.avalon.java.j20.labs.Task;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Задание №1
@@ -22,25 +22,6 @@ public class Task1 implements Task {
         File output = new File("countries_binary_mode_output.txt");
         String text = read(input);
         write(output, text);
-
-        /*
-         * TODO(Студент): Выполнить задание №1
-         *
-         * 1. Реализовать метод read.
-         *
-         *    При чтении файла следует пользоваться типами данных:
-         *    InputStream и FileInputStream.
-         *
-         *    Для сохранениня прочитанных данных следует пользоваться
-         *    классом ByteArrayOutputStream.
-         *
-         * 2. Реализовать метод write.
-         *
-         *    При реализации метода следует пользоваться типами данных:
-         *    OutputStream и FileOutputStream.
-         *
-         * 3. С использованием отладчика проверить корректность работы программы.
-         */
     }
 
     /**
@@ -54,7 +35,18 @@ public class Task1 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private String read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+        try (InputStream input = new FileInputStream(file);
+              ByteArrayOutputStream output = new ByteArrayOutputStream(16)) {
+
+            byte[] buffer = new byte[16];
+            int len;
+            while ((len = input.read(buffer)) != -1) {
+                output.write(buffer, 0, len);
+            }
+
+            byte[] bytes = output.toByteArray();
+            return new String(bytes);
+        }
     }
 
     /**
@@ -66,6 +58,9 @@ public class Task1 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, String text) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        byte[] bytes = text.getBytes();
+        try (OutputStream output = new FileOutputStream(file)) {
+                output.write(bytes);
+        }
     }
 }

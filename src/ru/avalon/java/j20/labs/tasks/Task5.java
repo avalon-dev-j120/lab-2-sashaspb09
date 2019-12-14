@@ -18,6 +18,9 @@ public class Task5 implements Task {
      */
     @Override
     public void run() throws IOException {
+        ResourceBundle resource1 = read("resources/strings/titles");
+        Locale locale = new Locale("ru");
+        ResourceBundle resource2 = read("resources/strings/titles_ru", locale);
         /*
          * TODO(Студент): Выполнить задание №5
          *
@@ -41,7 +44,8 @@ public class Task5 implements Task {
      * @return новый экземпляр типа {@link ResourceBundle}
      */
     private ResourceBundle read(String path) {
-        throw new UnsupportedOperationException("Not implement yet!");
+        ResourceBundle bundle = ResourceBundle.getBundle(path);
+        return bundle;
     }
 
     /**
@@ -51,6 +55,7 @@ public class Task5 implements Task {
      * @return новый экземпляр типа {@link ResourceBundle}
      */
     private ResourceBundle read(String path, Locale locale) {
-        throw new UnsupportedOperationException("Not implement yet!");
+        ResourceBundle bundle = ResourceBundle.getBundle(path, locale);
+        return bundle;
     }
 }

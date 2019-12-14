@@ -2,9 +2,13 @@ package ru.avalon.java.j20.labs.tasks;
 
 import ru.avalon.java.j20.labs.Task;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.BufferedReader;
+import ru.avalon.java.j20.labs.Task;
+
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 /**
  * Задание №3
@@ -23,22 +27,6 @@ public class Task3 implements Task {
         File output = new File("countries_buffered_mode_output.txt");
         Collection<String> lines = read(input);
         write(output, lines);
-
-        /*
-         * TODO(Студент): Выполнить задание №3
-         *
-         * 1. Реализовать метод read.
-         *
-         *    При чтении файла следует пользоваться типами данных:
-         *    FileReader и BufferedReader.
-         *
-         * 2. Реализовать метод write.
-         *
-         *    При реализации метода следует пользоваться типами данных:
-         *    PrintWriter.
-         *
-         * 3. С использованием отладчика проверить корректность работы программы.
-         */
     }
 
     /**
@@ -52,7 +40,16 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private Collection<String> read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+        try (FileReader reader = new FileReader(file);
+             BufferedReader input = new BufferedReader(reader)) {
+            Collection<String> buffer = new LinkedList<>();
+
+            String line;
+            while ((line = input.readLine()) != null) {
+                buffer.add(line);
+            }
+            return new ArrayList<>(buffer);
+        }
     }
 
     /**
@@ -66,6 +63,8 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, Collection<String> collection) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        try (PrintWriter output = new PrintWriter(file)) {
+            for (String line : collection) output.println(line);
+        }
     }
 }

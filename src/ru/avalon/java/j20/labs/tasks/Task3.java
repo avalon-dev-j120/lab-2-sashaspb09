@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import ru.avalon.java.j20.labs.Task;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -23,8 +25,10 @@ public class Task3 implements Task {
      */
     @Override
     public void run() throws IOException {
-        File input = new File("assets/countries.txt");
-        File output = new File("countries_buffered_mode_output.txt");
+        Path path = Paths.get("/home/sasha_deepin/Documents/lab-2-sashaspb09-develop/src/ru/avalon/java/j20/labs", "test.txt");
+         File input = path.toFile();
+        
+        File output = new File("/home/sasha_deepin/Documents/lab-2-sashaspb09-develop/src/ru/avalon/java/j20/labs", "countries_buffered_mode_output.txt");
         Collection<String> lines = read(input);
         write(output, lines);
     }
@@ -64,7 +68,8 @@ public class Task3 implements Task {
      */
     private void write(File file, Collection<String> collection) throws IOException {
         try (PrintWriter output = new PrintWriter(file)) {
-            for (String line : collection) output.println(line);
+            for (String line : collection) {output.println(line); } 
+            
         }
     }
 }

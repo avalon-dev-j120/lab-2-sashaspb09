@@ -2,6 +2,8 @@ package ru.avalon.java.j20.labs.tasks;
 
 import java.io.ByteArrayOutputStream;
 import ru.avalon.java.j20.labs.Task;
+import java.nio.*;
+import java.nio.file.*;
 
 import java.io.*;
 
@@ -18,9 +20,13 @@ public class Task1 implements Task {
      */
     @Override
     public void run() throws IOException {
-        File input = new File("assets/countries.txt");
-        File output = new File("countries_binary_mode_output.txt");
+        
+         
+       Path path = Paths.get("/home/sasha_deepin/Documents/lab-2-sashaspb09-develop/src/ru/avalon/java/j20/labs", "test.txt");
+       File input = path.toFile();
+        File output = new File("/home/sasha_deepin/Documents/lab-2-sashaspb09-develop/src/ru/avalon/java/j20/labs","countries_binary_mode_output.txt");
         String text = read(input);
+       // System.out.println(text);
         write(output, text);
     }
 
@@ -61,6 +67,7 @@ public class Task1 implements Task {
         byte[] bytes = text.getBytes();
         try (OutputStream output = new FileOutputStream(file)) {
                 output.write(bytes);
+                //3.2 37 min
         }
     }
 }

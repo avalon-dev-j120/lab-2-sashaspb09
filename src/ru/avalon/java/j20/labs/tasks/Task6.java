@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Collection;
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 /**
@@ -27,7 +29,10 @@ public class Task6 implements Task {
      */
     @Override
     public void run() throws IOException, ParseException {
-        File input = new File("assets/countries.txt");
+           
+       Path path = Paths.get("/home/sasha_deepin/Documents/lab-2-sashaspb09-develop/src/ru/avalon/java/j20/labs", "test.txt");
+       File input = path.toFile();
+        
         Collection<Country> countries = read(input);
 
 

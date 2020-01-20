@@ -3,6 +3,8 @@ package ru.avalon.java.j20.labs.tasks;
 import ru.avalon.java.j20.labs.Task;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Задание №2
@@ -17,9 +19,12 @@ public class Task2 implements Task {
      */
     @Override
     public void run() throws IOException {
-        File input = new File("assets/countries.txt");
-        File output = new File("countries_text_mode_output.txt");
+          Path path = Paths.get("/home/sasha_deepin/Documents/lab-2-sashaspb09-develop/src/ru/avalon/java/j20/labs", "test.txt");
+       File input = path.toFile();
+        File output = new File("/home/sasha_deepin/Documents/lab-2-sashaspb09-develop/src/ru/avalon/java/j20/labs","countries_text_mode_output.txt");
+     
         String text = read(input);
+     //   System.out.println(text );
         write(output, text);
     }
 
@@ -41,9 +46,11 @@ public class Task2 implements Task {
             char[] buffer = new char[16];
             int len;
             while ((len = reader.read(buffer)) != -1) {
-                text.append(buffer, 0, len);
+                      
+                    text.append(buffer, 0, len);
             }
-            return text.toString();
+                         
+        return text.toString();
         }
     }
 
